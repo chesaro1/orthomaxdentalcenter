@@ -1,0 +1,158 @@
+<div class="services-container">
+    <!-- Services Menu -->
+    <nav class="services-menu">
+        <h3>Our Services</h3>
+        <ul>
+            <li><a href="#general" class="active">General Dentistry</a></li>
+            <li><a href="#pediatric">Pediatric Dentistry</a></li>
+            <li><a href="#orthodontics">Orthodontics</a></li>
+            <li><a href="#surgery">Oral Surgery</a></li>
+            <li><a href="#cosmetic">Cosmetic Dentistry</a></li>
+        </ul>
+    </nav>
+
+    <!-- Article Content -->
+    <article class="services-content">
+        <section id="general" class="service-section">
+            <h2>General Dentistry</h2>
+            <p>Content about general dentistry...</p>
+        </section>
+        
+        <section id="pediatric" class="service-section">
+            <h2>Pediatric Dentistry</h2>
+            <p>Content about pediatric dentistry...</p>
+        </section>
+
+        <section id="orthodontics" class="service-section">
+            <h2>Orthodontics</h2>
+            <p>Content about orthodontics...</p>
+        </section>
+
+        <section id="surgery" class="service-section">
+            <h2>Oral Surgery</h2>
+            <p>Content about oral surgery...</p>
+        </section>
+
+        <section id="cosmetic" class="service-section">
+            <h2>Cosmetic Dentistry</h2>
+            <p>Content about cosmetic dentistry...</p>
+        </section>
+    </article>
+</div>
+
+<style>
+.services-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+    position: relative;
+}
+
+.services-menu {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+    width: 300px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.services-menu h3 {
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.services-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.services-menu li {
+    margin: 10px 0;
+}
+
+.services-menu a {
+    display: block;
+    padding: 12px 20px;
+    color: #4a5568;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.services-menu a.active {
+    background: white;
+    border-left-color: #4299e1;
+    color: #2d3748;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.services-content {
+    flex: 1;
+    padding: 20px 0;
+}
+
+.service-section {
+    margin-bottom: 80px;
+    padding: 40px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 768px) {
+    .services-container {
+        flex-direction: column;
+    }
+    
+    .services-menu {
+        position: static;
+        width: 100%;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('.service-section');
+    const menuLinks = document.querySelectorAll('.services-menu a');
+    
+    // Intersection Observer setup
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                menuLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, { 
+        threshold: 0.5,
+        rootMargin: '0px 0px -50% 0px'
+    });
+
+    // Observe all sections
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    // Smooth scroll for menu links
+    menuLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            document.querySelector(targetId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+});
+</script>
