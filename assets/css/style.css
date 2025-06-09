@@ -267,6 +267,7 @@ justify-content: center;
   top: -100px;
   background-color: #72e53661;
   box-shadow: var(--shadow-2);
+  backdrop-filter: blur(20px);
   animation: slideIn 0.5s var(--cubic-out) forwards;
   
 }
