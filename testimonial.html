@@ -148,9 +148,11 @@
   <div class="appointment-container">
     <div class="stationery-form"data-aos="flip-up">
       <h2 class="section-subtitle">Write a Review</h2>
-      <form class="vintage-form" action="https://api.web3forms.com/submit" method="POST" class="appointment-form"id="appointmentForm">
-          <input type="hidden" name="access_key" value="3271f5ca-4251-4948-9942-08bdaea8ee16"> 
-          
+      <form class="pr-registration-form floating-form" action="https://formsubmit.co/orthomaxdentalcentre@gmail.com" method="POST" class="appointment-form" id="appointmentForm">
+        <!--<input type="hidden" name="access_key" value="3271f5ca-4251-4948-9942-08bdaea8ee16">--> 
+        <!--honeypot-->
+        <input type="text" name="_honey" style="display:none;">
+        <input type="hidden" name="_next" value="./index.html">
         <div class="form-row">
           <div class="form-group">
             <input type="text" id="full-name" name="Full Name"  required>
