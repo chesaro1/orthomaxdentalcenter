@@ -29,6 +29,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!--<script src="https://www.google.com/recaptcha/api.js" async defer></script>-->
    </head>
 
 <body id="top">
@@ -149,8 +150,8 @@
       <!-- Form Container -->
       <div class="form-container">
         <h2 class="section-title">Get in Touch</h2>
-        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" class="appointment-form"id="appointmentForm">
-          <input type="hidden" name="access_key" value="3271f5ca-4251-4948-9942-08bdaea8ee16"> 
+        <form class="contact-form" action="https://formsubmit.co/orthomaxdentalcentre@gmail.com" method="POST" class="appointment-form"id="appointmentForm">
+          <!--<input type="hidden" name="access_key" value="3271f5ca-4251-4948-9942-08bdaea8ee16">--> 
           
           <div class="form-group">
             <input type="text" id="name" name="Full Name" required>
@@ -167,9 +168,19 @@
             <label for="message">Your Message</label>
             <i class="fas fa-comment" width="20px"></i>
           </div>
+          <!-- Place this right after your textarea and before the submit button -->
+          <!--<div class="recaptcha-container">
+            <div class="g-recaptcha" data-sitekey="6LebDForAAAAADuucI5X4pwhNQpG-rvnuQpSbRaT"></div>
+            <p class="recaptcha-note">This site is protected by reCAPTCHA and the Google 
+                <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a> and
+                <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.
+            </p>
+          </div>
+        -->
           <button type="submit" class="submit-btn">
             Send Message <i class="fas fa-paper-plane"></i>
           </button>
+          <div id="responseMessage" class="response-message"></div>
         </form>
       </div>
   
@@ -455,6 +466,68 @@
     - custom js link
   -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!--<script>document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('appointmentForm');
+    const submitBtn = form.querySelector('.submit-btn');
+    const responseMessage = document.getElementById('responseMessage');
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Check if reCAPTCHA is completed
+        const recaptchaResponse = grecaptcha.getResponse();
+        if (!recaptchaResponse) {
+            showResponse('Please complete the reCAPTCHA verification.', 'error');
+            return;
+        }
+        
+        // Change button text and disable during submission
+        const originalBtnHTML = submitBtn.innerHTML;
+        submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+        submitBtn.disabled = true;
+        
+        // Get form data
+        const formData = new FormData(form);
+        
+        // Add reCAPTCHA response to form data
+        formData.append('g-recaptcha-response', recaptchaResponse);
+        
+        // Send to Web3Forms
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showResponse('Thank you! Your message has been sent successfully.', 'success');
+                form.reset();
+                grecaptcha.reset();
+            } else {
+                showResponse(`Error: ${data.message || 'Failed to send message. Please try again.'}`, 'error');
+            }
+        })
+        .catch(error => {
+            showResponse('An unexpected error occurred. Please try again later.', 'error');
+        })
+        .finally(() => {
+            submitBtn.innerHTML = originalBtnHTML;
+            submitBtn.disabled = false;
+        });
+    });
+    
+    function showResponse(message, type) {
+        responseMessage.textContent = message;
+        responseMessage.className = `response-message ${type}`;
+        
+        // Auto-hide success message after 5 seconds
+        if (type === 'success') {
+            setTimeout(() => {
+                responseMessage.style.display = 'none';
+            }, 5000);
+        }
+    }
+});</script>-->
   <script>
     AOS.init({
       duration: 1500,
